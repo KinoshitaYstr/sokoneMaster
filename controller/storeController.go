@@ -20,15 +20,14 @@ func AddStore(c *gin.Context) {
 			panic(err.Error())
 		}
 		c.JSON(http.StatusCreated, gin.H{
-			"status": "OK -> ",
+			"status": "OK",
 		})
 	}
 }
 
 func ListStores(c *gin.Context) {
 	storeList := service.FindAllStores()
-	c.JSONP(http.StatusAccepted, gin.H{
-		"message": "OK",
-		"stores":  storeList,
+	c.HTML(http.StatusOK, "store_list.tmpl", gin.H{
+		"stores": storeList,
 	})
 }

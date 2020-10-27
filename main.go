@@ -9,6 +9,8 @@ import (
 func main() {
 	engine := gin.Default()
 
+	engine.LoadHTMLGlob("templates/*.tmpl")
+
 	service.Migration()
 
 	storeEngine := engine.Group("/store")
