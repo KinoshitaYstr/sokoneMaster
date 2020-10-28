@@ -19,9 +19,20 @@
         let map;
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8,
+                center: {lat: 35.028892, lng: 135.779271},
+                zoom: 15,
             });
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        map.setCenter(pos);
+                    }
+                )
+            }
         }
     </script>
 </head>
