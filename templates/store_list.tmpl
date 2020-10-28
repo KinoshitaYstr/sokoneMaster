@@ -33,13 +33,17 @@
                     }
                 )
             }
+            let marker;
             {{range .stores}}
-                new google.maps.Marker({
+                marker = new google.maps.Marker({
                     position: {
                         lat: {{.Lat}},
-                        lng: {{.Lng}}
+                        lng: {{.Lng}},
                     },
                     map: map,
+                });
+                google.maps.event.addListener(marker, 'click', function alertMarker(event) {
+                    alert("{{.Name}} clicked!");
                 });
             {{end}}
         }
