@@ -33,10 +33,7 @@ func AddStore(c *gin.Context) {
 		if err != nil {
 			panic(err)
 		}
-		err = service.CreateStore(name, res[0].FormattedAddress, res[0].Geometry.Location.Lat, res[0].Geometry.Location.Lng)
-		if err != nil {
-			panic(err.Error())
-		}
+		service.CreateStore(name, res[0].FormattedAddress, res[0].Geometry.Location.Lat, res[0].Geometry.Location.Lng)
 		c.Redirect(http.StatusFound, "/store/list")
 	}
 }
@@ -46,10 +43,7 @@ func DeleteStore(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
-	err = service.DeleteStoreById(id)
-	if err != nil {
-		panic(err)
-	}
+	service.DeleteStoreById(id)
 	c.Redirect(http.StatusFound, "/store/list")
 }
 
@@ -58,5 +52,17 @@ func ListStores(c *gin.Context) {
 	c.HTML(http.StatusOK, "store_list.tmpl", gin.H{
 		"stores":  storeList,
 		"API_KEY": os.Getenv("GOOGLE_MAP_API_KEY"),
+	})
+}
+
+func ShowStore(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		panic(err)
+	}
+	store := service.FindStoreById(id)
+	// c.Redirect(http.StatusFound, "/store/list")
+	c.HTML(http.StatusOK, "store_show.tmpl", gin.H{
+		"store": store,
 	})
 }

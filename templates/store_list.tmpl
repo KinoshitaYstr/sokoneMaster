@@ -43,7 +43,7 @@
                     map: map,
                 });
                 google.maps.event.addListener(marker, 'click', function alertMarker(event) {
-                    alert("{{.Name}} clicked!");
+                    window.location.href="/store/show/{{.ID}}";
                 });
             {{end}}
         }
@@ -53,7 +53,7 @@
     <div id="map"></div>
     <ul>
         {{range .stores}}
-        <li>{{.ID}} {{.Name}} {{.Address}} - <a href="/store/delete/{{.ID}}">delete</a></li>
+        <li><a href="/store/show/{{.ID}}">{{.Name}} {{.Address}}</a> - <a href="/store/delete/{{.ID}}">削除</a></li>
         {{end}}
     </ul>
     <br>

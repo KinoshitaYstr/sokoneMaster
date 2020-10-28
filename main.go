@@ -25,6 +25,7 @@ func main() {
 		storeEngine.POST("/add", controller.AddStore)
 		storeEngine.GET("/delete/:id", controller.DeleteStore)
 		storeEngine.GET("/list", controller.ListStores)
+		storeEngine.GET("/show/:id", controller.ShowStore)
 	}
 
 	engine.Run(":3000")
