@@ -1,12 +1,15 @@
 package controller
 
 import (
+	"context"
 	"net/http"
 	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"main.mod/service"
+
+	"googlemaps.github.io/maps"
 )
 
 func AddStore(c *gin.Context) {
@@ -17,7 +20,20 @@ func AddStore(c *gin.Context) {
 			"status": "parameter error: " + name + "-" + address,
 		})
 	} else {
-		err := service.CreateStore(name, address)
+		client, err := maps.NewClient(maps.WithAPIKey(os.Getenv("GOOGLE_MAP_API_KEY")))
+		if err != nil {
+			panic(err)
+		}
+		req := &maps.GeocodingRequest{
+			Address:  address,
+			Language: "ja",
+			Region:   "JP",
+		}
+		res, err := client.Geocode(context.Background(), req)
+		if err != nil {
+			panic(err)
+		}
+		err = service.CreateStore(name, res[0].FormattedAddress, res[0].Geometry.Location.Lat, res[0].Geometry.Location.Lng)
 		if err != nil {
 			panic(err.Error())
 		}

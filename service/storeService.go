@@ -4,9 +4,9 @@ import (
 	"main.mod/model"
 )
 
-func CreateStore(storeName string, address string) error {
+func CreateStore(storeName string, address string, lat float64, lng float64) error {
 	db := gormConnect()
-	afterDb := db.Create(&model.Store{Name: storeName, Address: address})
+	afterDb := db.Create(&model.Store{Name: storeName, Address: address, Lat: lat, Lng: lng})
 	return afterDb.Error
 }
 

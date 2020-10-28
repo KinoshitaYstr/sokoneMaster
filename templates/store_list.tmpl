@@ -33,6 +33,15 @@
                     }
                 )
             }
+            {{range .stores}}
+                new google.maps.Marker({
+                    position: {
+                        lat: {{.Lat}},
+                        lng: {{.Lng}}
+                    },
+                    map: map,
+                });
+            {{end}}
         }
     </script>
 </head>
