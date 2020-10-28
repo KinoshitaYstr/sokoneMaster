@@ -10,6 +10,13 @@ func CreateStore(storeName string, address string) error {
 	return afterDb.Error
 }
 
+func DeleteStoreById(id int) error {
+	db := gormConnect()
+	target := FindStoreById(id)
+	afterDb := db.Delete(&target)
+	return afterDb.Error
+}
+
 func FindStoreById(id int) model.Store {
 	db := gormConnect()
 	var store model.Store

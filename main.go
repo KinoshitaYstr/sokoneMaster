@@ -16,6 +16,7 @@ func main() {
 	storeEngine := engine.Group("/store")
 	{
 		storeEngine.POST("/add", controller.AddStore)
+		storeEngine.GET("/delete/:id", controller.DeleteStore)
 		storeEngine.GET("/list", controller.ListStores)
 	}
 

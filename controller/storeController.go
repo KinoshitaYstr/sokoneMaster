@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"main.mod/service"
@@ -21,6 +22,18 @@ func AddStore(c *gin.Context) {
 		}
 		c.Redirect(http.StatusFound, "/store/list")
 	}
+}
+
+func DeleteStore(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		panic(err)
+	}
+	err = service.DeleteStoreById(id)
+	if err != nil {
+		panic(err)
+	}
+	c.Redirect(http.StatusFound, "/store/list")
 }
 
 func ListStores(c *gin.Context) {

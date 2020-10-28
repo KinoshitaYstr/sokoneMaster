@@ -9,7 +9,7 @@
 <body>
     <ul>
         {{range .stores}}
-        <li>{{.ID}} {{.Name}} {{.Address}}</li>
+        <li>{{.ID}} {{.Name}} {{.Address}} - <a href="/store/delete/{{.ID}}">delete</a></li>
         {{end}}
     </ul>
     <br>
