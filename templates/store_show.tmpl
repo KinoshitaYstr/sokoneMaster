@@ -5,10 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>{{.store.Name}}</title>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{.API_KEY}}&callback=initMap"
+        defer    
+    ></script>
+    <style type="text/css">
+        #map {
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+    <script type="text/javascript">
+        let map;
+        let marker;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: {{.store.Lat}},
+                    lng: {{.store.Lng}}
+                },
+                zoom: 17,
+            });
+            marker = new google.maps.Marker({
+                position: {
+                    lat: {{.store.Lat}},
+                    lng: {{.store.Lng}},
+                },
+                map: map,
+            })
+        }
+    </script>
 </head>
 <body>
     <h1>{{.store.Name}}</h1>
     <h2>住所：{{.store.Address}}</h2>
+    <br>
+    <div id="map"></div>
+    <br>
+    <a href="/store/delete/{{.store.ID}}">削除</a>
     <br>
     <a href="/store/list">戻る</a>
 </body>

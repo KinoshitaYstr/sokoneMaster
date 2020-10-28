@@ -63,6 +63,7 @@ func ShowStore(c *gin.Context) {
 	store := service.FindStoreById(id)
 	// c.Redirect(http.StatusFound, "/store/list")
 	c.HTML(http.StatusOK, "store_show.tmpl", gin.H{
-		"store": store,
+		"store":   store,
+		"API_KEY": os.Getenv("GOOGLE_MAP_API_KEY"),
 	})
 }
