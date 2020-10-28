@@ -15,11 +15,8 @@ func main() {
 
 	storeEngine := engine.Group("/store")
 	{
-		v1 := storeEngine.Group("/v1")
-		{
-			v1.POST("/add", controller.AddStore)
-			v1.GET("/list", controller.ListStores)
-		}
+		storeEngine.POST("/add", controller.AddStore)
+		storeEngine.GET("/list", controller.ListStores)
 	}
 
 	engine.Run(":3000")

@@ -8,20 +8,18 @@ import (
 )
 
 func AddStore(c *gin.Context) {
-	name := c.PostForm("name")
+	name := c.PostForm("store_name")
 	address := c.PostForm("address")
 	if name == "" || address == "" {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"status": "parameter error",
+			"status": "parameter error: " + name + "-" + address,
 		})
 	} else {
 		err := service.CreateStore(name, address)
 		if err != nil {
 			panic(err.Error())
 		}
-		c.JSON(http.StatusCreated, gin.H{
-			"status": "OK",
-		})
+		c.Redirect(http.StatusFound, "/store/list")
 	}
 }
 

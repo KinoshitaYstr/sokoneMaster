@@ -12,5 +12,11 @@
         <li>{{.ID}} {{.Name}} {{.Address}}</li>
         {{end}}
     </ul>
+    <br>
+    <form action="/store/add" method="post">
+    <p>店の名前 : <input type="text" name="store_name"></p>
+    <p>住所 : <input type="text" name="address"></p>
+    <p><input type="submit" value="送信"></p>
+    </form>
 </body>
 </html>
