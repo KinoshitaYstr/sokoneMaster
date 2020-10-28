@@ -28,5 +28,13 @@ func main() {
 		storeEngine.GET("/show/:id", controller.ShowStore)
 	}
 
+	productEngin := engine.Group("/product")
+	{
+		productEngin.POST("/add", controller.AddProduct)
+		productEngin.GET("/delete/:id", controller.DeleteProduct)
+		productEngin.GET("/list", controller.ListProducts)
+		productEngin.GET("/show/:id", controller.ShowProduct)
+	}
+
 	engine.Run(":3000")
 }
