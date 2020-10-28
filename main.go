@@ -2,11 +2,18 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"main.mod/controller"
 	"main.mod/service"
 )
 
 func main() {
+
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
+	}
+
 	engine := gin.Default()
 
 	engine.LoadHTMLGlob("templates/*.tmpl")

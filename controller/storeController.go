@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -39,6 +40,7 @@ func DeleteStore(c *gin.Context) {
 func ListStores(c *gin.Context) {
 	storeList := service.FindAllStores()
 	c.HTML(http.StatusOK, "store_list.tmpl", gin.H{
-		"stores": storeList,
+		"stores":  storeList,
+		"API_KEY": os.Getenv("GOOGLE_MAP_API_KEY"),
 	})
 }

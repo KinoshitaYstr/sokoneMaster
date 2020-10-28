@@ -5,8 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>store list</title>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{.API_KEY}}&callback=initMap"
+        defer    
+    ></script>
+    <style type="text/css">
+        #map {
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+    <script type="text/javascript">
+        let map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8,
+            });
+        }
+    </script>
 </head>
 <body>
+    <div id="map"></div>
     <ul>
         {{range .stores}}
         <li>{{.ID}} {{.Name}} {{.Address}} - <a href="/store/delete/{{.ID}}">delete</a></li>
