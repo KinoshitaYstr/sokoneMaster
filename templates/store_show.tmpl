@@ -42,6 +42,23 @@
     <br>
     <div id="map"></div>
     <br>
+    <ul>
+    {{range .store.PriceDatas}}
+    <li>{{.ID}}</li>
+    {{end}}
+    </ul>
+    <br>
+    <form action="/price_data/add" method="post">
+    <input type="hidden" name="store_id" value="{{.store.ID}}">
+    <p>品名：<select name="product_id" size="1">
+        {{range .products}}
+        <option value="{{.ID}}" label="{{.Name}}">{{.Name}}</option>
+        {{end}}
+    </select></p>
+    <p>値段：<input type="text" name="price">円</p>
+    <p><input type="submit" value="追加"></p>
+    </form>
+    <br>
     <a href="/store/delete/{{.store.ID}}">削除</a>
     <br>
     <a href="/store/list">戻る</a>

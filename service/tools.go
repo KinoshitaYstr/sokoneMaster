@@ -22,5 +22,5 @@ func gormConnect() *gorm.DB {
 
 func Migration() {
 	db := gormConnect()
-	db.AutoMigrate(&model.Store{}, &model.Product{})
+	db.AutoMigrate(&model.Store{}, &model.Product{}, &model.PriceData{})
 }

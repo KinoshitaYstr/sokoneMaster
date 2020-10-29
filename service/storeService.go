@@ -6,7 +6,13 @@ import (
 
 func CreateStore(storeName string, address string, lat float64, lng float64) {
 	db := gormConnect()
-	afterDb := db.Create(&model.Store{Name: storeName, Address: address, Lat: lat, Lng: lng})
+	afterDb := db.Create(&model.Store{
+		Name:       storeName,
+		Address:    address,
+		Lat:        lat,
+		Lng:        lng,
+		PriceDatas: []model.PriceData{},
+	})
 	if afterDb.Error != nil {
 		panic(afterDb.Error)
 	}
@@ -24,10 +30,14 @@ func DeleteStoreById(id int) {
 func FindStoreById(id int) model.Store {
 	db := gormConnect()
 	var store model.Store
-	afterDb := db.First(&store, id)
+	afterDb := db.First(&store, id).Association("PriceDatas")
 	if afterDb.Error != nil {
 		panic(afterDb.Error)
 	}
+
+	var pd model.PriceData
+	var tmp model.Store
+	db.First(&pd, 1).Association("store").Find(&tmp)
 	return store
 }
 

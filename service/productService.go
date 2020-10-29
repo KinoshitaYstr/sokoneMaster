@@ -4,7 +4,11 @@ import "main.mod/model"
 
 func CreateProduct(productName string, listPrice int) {
 	db := gormConnect()
-	afterDb := db.Create(&model.Product{Name: productName, ListPrice: listPrice})
+	afterDb := db.Create(&model.Product{
+		Name:       productName,
+		ListPrice:  listPrice,
+		PriceDatas: []model.PriceData{},
+	})
 	if afterDb.Error != nil {
 		panic(afterDb.Error)
 	}

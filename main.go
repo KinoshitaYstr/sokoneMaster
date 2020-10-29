@@ -36,5 +36,10 @@ func main() {
 		productEngin.GET("/show/:id", controller.ShowProduct)
 	}
 
+	priceDataEngine := engine.Group("/price_data")
+	{
+		priceDataEngine.POST("/add", controller.AddPriceDataToProductAndStore)
+	}
+
 	engine.Run(":3000")
 }
