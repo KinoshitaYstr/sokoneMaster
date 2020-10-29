@@ -14,6 +14,15 @@
     <input type="submit" value="更新">
     </form>
     <br>
+    <h3>値段順</h3>
+    <ul>
+    {{range .productPrices}}
+    <li>
+    <a href="/store/show/{{.StoreID}}">{{.StoreName}}({{.Price}}円)</a>
+    </li>
+    {{end}}
+    </ul>
+    <br>
     <a href="/product/delete/{{.product.ID}}">削除</a>
     <br>
     <a href="/product/list">戻る</a>

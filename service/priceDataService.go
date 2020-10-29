@@ -58,6 +58,44 @@ type ProductPrice struct {
 	StoreName   string
 }
 
+func FindSortAllProductPriceByProductId(product_id int) []ProductPrice {
+	var productPrices []ProductPrice
+	db := gormConnect()
+	var priceDatas []model.PriceData
+	db.Where("product_id = ?", product_id).Order("price").Find(&priceDatas)
+	for _, priceData := range priceDatas {
+		var productPrice ProductPrice
+		product := FindProductById(product_id)
+		productPrice.ProductID = product.ID
+		productPrice.ProductName = product.Name
+		store := FindStoreById(priceData.StoreID)
+		productPrice.StoreID = store.ID
+		productPrice.StoreName = store.Name
+		productPrice.Price = priceData.Price
+		productPrices = append(productPrices, productPrice)
+	}
+	return productPrices
+}
+
+func FindSortAllProductPriceByStoreId(store_id int) []ProductPrice {
+	var productPrices []ProductPrice
+	db := gormConnect()
+	var priceDatas []model.PriceData
+	db.Where("store_id = ?", store_id).Order("price").Find(&priceDatas)
+	for _, priceData := range priceDatas {
+		var productPrice ProductPrice
+		product := FindProductById(store_id)
+		productPrice.ProductID = product.ID
+		productPrice.ProductName = product.Name
+		store := FindStoreById(priceData.StoreID)
+		productPrice.StoreID = store.ID
+		productPrice.StoreName = store.Name
+		productPrice.Price = priceData.Price
+		productPrices = append(productPrices, productPrice)
+	}
+	return productPrices
+}
+
 func FindAllProductPriceByStoreId(storeID int) []ProductPrice {
 	db := gormConnect()
 	var productPrices []ProductPrice

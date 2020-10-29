@@ -58,8 +58,10 @@ func ShowProduct(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
+	productPrices := service.FindSortAllProductPriceByProductId(id)
 	product := service.FindProductById(id)
 	c.HTML(http.StatusOK, "product_show.tmpl", gin.H{
-		"product": product,
+		"product":       product,
+		"productPrices": productPrices,
 	})
 }
