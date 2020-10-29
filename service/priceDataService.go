@@ -39,6 +39,15 @@ func UpdatePriceDataById(id int, price int) {
 	}
 }
 
+func DeletePriceDataById(id int) {
+	db := gormConnect()
+	priceData := findPriceDataById(id)
+	afterDb := db.Delete(&priceData)
+	if afterDb.Error != nil {
+		panic(afterDb.Error)
+	}
+}
+
 type ProductPrice struct {
 	PriceDataID uint
 	ProductID   uint

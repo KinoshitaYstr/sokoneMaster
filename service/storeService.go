@@ -30,14 +30,10 @@ func DeleteStoreById(id int) {
 func FindStoreById(id int) model.Store {
 	db := gormConnect()
 	var store model.Store
-	afterDb := db.First(&store, id).Association("PriceDatas")
+	afterDb := db.First(&store, id)
 	if afterDb.Error != nil {
 		panic(afterDb.Error)
 	}
-
-	var pd model.PriceData
-	var tmp model.Store
-	db.First(&pd, 1).Association("store").Find(&tmp)
 	return store
 }
 

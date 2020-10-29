@@ -41,6 +41,7 @@ func main() {
 	{
 		priceDataEngine.POST("/add", controller.AddPriceDataToProductAndStore)
 		priceDataEngine.POST("/store/update", controller.UpdatePriceDataByProductPriceByStoreShow)
+		priceDataEngine.GET("/store/:store_id/delete/:price_data_id", controller.DeletePriceDataByStoreShow)
 	}
 
 	engine.Run(":3000")

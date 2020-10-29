@@ -51,6 +51,7 @@
     {{.ProductName}}(定価{{.ListPrice}}円)-
     <input type="text" name="price" value="{{.Price}}">円
     <input type="submit" value="値段更新">
+    -<a href="/price_data/store/{{.StoreID}}/delete/{{.PriceDataID}}">削除</a>
     </form>
     </li>
     {{end}}

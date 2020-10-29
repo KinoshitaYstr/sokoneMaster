@@ -37,3 +37,12 @@ func UpdatePriceDataByProductPriceByStoreShow(c *gin.Context) {
 	service.UpdatePriceDataById(priceDataID, price)
 	c.Redirect(http.StatusFound, "/store/show/"+c.PostForm("store_id"))
 }
+
+func DeletePriceDataByStoreShow(c *gin.Context) {
+	priceDataID, err := strconv.Atoi(c.Param("price_data_id"))
+	if err != nil {
+		panic(err)
+	}
+	service.DeletePriceDataById(priceDataID)
+	c.Redirect(http.StatusFound, "/store/show/"+c.Param("store_id"))
+}
