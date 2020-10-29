@@ -43,8 +43,16 @@
     <div id="map"></div>
     <br>
     <ul>
-    {{range .store.PriceDatas}}
-    <li>{{.ID}}</li>
+    {{range .productPrices}}
+    <li>
+    <form action="/price_data/store/update" method="post">
+    <input type="hidden" name="price_data_id" value="{{.PriceDataID}}">
+    <input type="hidden" name="store_id" value="{{.StoreID}}">
+    {{.ProductName}}(定価{{.ListPrice}}円)-
+    <input type="text" name="price" value="{{.Price}}">円
+    <input type="submit" value="値段更新">
+    </form>
+    </li>
     {{end}}
     </ul>
     <br>
@@ -52,7 +60,7 @@
     <input type="hidden" name="store_id" value="{{.store.ID}}">
     <p>品名：<select name="product_id" size="1">
         {{range .products}}
-        <option value="{{.ID}}" label="{{.Name}}">{{.Name}}</option>
+        <option value="{{.ID}}" label="{{.Name}}(定価{{.ListPrice}}円)">{{.Name}}</option>
         {{end}}
     </select></p>
     <p>値段：<input type="text" name="price">円</p>

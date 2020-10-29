@@ -33,6 +33,19 @@ func DeleteProduct(c *gin.Context) {
 	c.Redirect(http.StatusFound, "/product/list")
 }
 
+func UpdateProductListPrice(c *gin.Context) {
+	id, err := strconv.Atoi(c.PostForm("id"))
+	if err != nil {
+		panic(err)
+	}
+	listPrice, err := strconv.Atoi(c.PostForm("list_price"))
+	if err != nil {
+		panic(err)
+	}
+	service.UpdateProductListPriceById(id, listPrice)
+	c.Redirect(http.StatusFound, "/product/show/"+c.PostForm("id"))
+}
+
 func ListProducts(c *gin.Context) {
 	productList := service.FindAllProducts()
 	c.HTML(http.StatusOK, "product_list.tmpl", gin.H{

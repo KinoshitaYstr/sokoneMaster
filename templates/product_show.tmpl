@@ -7,7 +7,12 @@
     <title>{{.product.Name}}</title>
 </head>
 <body>
-    <h1>{{.product.Name}} - {{.product.ListPrice}}円</h1>
+    <h1>{{.product.Name}}</h1>
+    <form action="/product/update/list_price" method="post">
+    <input type="hidden" name="id" value="{{.product.ID}}">
+    <h2>定価<input type="text" name="list_price" value="{{.product.ListPrice}}">円</h2>
+    <input type="submit" value="更新">
+    </form>
     <br>
     <a href="/product/delete/{{.product.ID}}">削除</a>
     <br>

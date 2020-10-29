@@ -23,6 +23,16 @@ func DeleteProductById(id int) {
 	}
 }
 
+func UpdateProductListPriceById(id int, listPrice int) {
+	db := gormConnect()
+	product := FindProductById(id)
+	product.ListPrice = listPrice
+	afterDb := db.Save(&product)
+	if afterDb.Error != nil {
+		panic(afterDb.Error)
+	}
+}
+
 func FindProductById(id int) model.Product {
 	db := gormConnect()
 	var product model.Product

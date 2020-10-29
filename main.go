@@ -34,11 +34,13 @@ func main() {
 		productEngin.GET("/delete/:id", controller.DeleteProduct)
 		productEngin.GET("/list", controller.ListProducts)
 		productEngin.GET("/show/:id", controller.ShowProduct)
+		productEngin.POST("/update/list_price", controller.UpdateProductListPrice)
 	}
 
 	priceDataEngine := engine.Group("/price_data")
 	{
 		priceDataEngine.POST("/add", controller.AddPriceDataToProductAndStore)
+		priceDataEngine.POST("/store/update", controller.UpdatePriceDataByProductPriceByStoreShow)
 	}
 
 	engine.Run(":3000")
